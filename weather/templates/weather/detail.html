@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    {% for item in weather %}
+        <p>Condition: {{ item.main | title }}</p>
+        <p>Description: {{ item.description | capfirst }}</p>
+    {% endfor %}
+    <p>Temperature: {{ main.temp }}</p>
+    <p>Humidity: {{ main.humidity }}%</p>
+    <p>Wind: {{ wind.speed }} km/h</p>
+    {% if wind.gust %}
+    <p>Wind gust: {{ wind.gust }} km/h</p>
+    {% endif %}
+    <p>City: {{ name }}</p>
+    <p>Sunrise: {{ sys.sunrise }}</p>
+    <p>Sunset: {{ sys.sunset }}</p>
+{% endblock %}

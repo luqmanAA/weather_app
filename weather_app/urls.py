@@ -16,11 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from .views import IndexView
+from .views import IndexView, weather_query_view
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
-    path('<str:country_code>/weather', include('weather.urls')),
+    path('weather-query', weather_query_view, name='weather-query'),
+    path('weather/', include('weather.urls')),
     path('<str:username>/notifications', include('notifications.urls')),
     path('admin/', admin.site.urls),
 ]

@@ -129,3 +129,5 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static/')]
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+ENV = '97bb0b20b9177fdaa8bfe19946a588b1'

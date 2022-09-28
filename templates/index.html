@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+    {{ index }}
+    <div>
+        <form>
+            <input type="text" name="location" required placeholder="Search for a location">
+            <input type="submit" value="Search">
+        </form>
+    </div>
+    <div class="row location">
+        <h4>Current Location</h4>
+        <div class="col current-location">
+            <div class="">
+                <h3 id="location_city"></h3>
+                <h4 id="location_country"></h4>
+                <div class="weather-details">
+                    <i class=""></i>
+                    <h4 class="temp"></h4>
+                    <p class="feels-like-temp"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row location">
+        <h4>Recently Searched Locations</h4>
+
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+        const options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
+
+        function success(pos) {
+            const crd = pos.coords;
+            console.log('Your current position is:');
+            console.log(`Latitude : ${crd.latitude}`);
+            console.log(`Longitude: ${crd.longitude}`);
+            console.log(`More or less ${crd.accuracy} meters.`);
+            let url = "{% url 'weather-query' %}"
+            let fetch_options = {
+                method: 'POST',
+                body: JSON.stringify({
+                    'lat': crd.latitude,
+                    'long': crd.longitude
+                }),
+                headers:{
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type':'application/json'
+                }
+            }
+            fetch(url, fetch_options)
+                .then(response => response.json())
+                .then(jsonResponse => {
+                    console.log(jsonResponse.weather[0].main)
+                    console.log(jsonResponse.main.temp)
+                    console.log(jsonResponse.wind.speed)
+                    console.log(jsonResponse.name)
+
+                })
+        }
+
+        function error(err) {
+            console.warn(`ERROR(${err.code}): ${err.message}`);
+        }
+
+        navigator.geolocation.getCurrentPosition(success, error, options);
+
+    </script>
+{% endblock %}

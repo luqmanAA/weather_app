@@ -8,6 +8,6 @@ from weather.views import (
 app_name = 'weather'
 
 urlpatterns = [
-    path('', TodayWeatherView.as_view(), name='today'),
-    path('<str:location>', WeatherDetailView.as_view(), name='weather_detail')
+    path('<str:location>', WeatherDetailView.as_view(), name='weather_detail'),
+    path('<str:location>/<str:str>', WeatherDetailView.as_view(), name='daily_detail'),
 ]

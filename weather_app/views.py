@@ -6,6 +6,7 @@ from django.views import View
 
 from .helpers.weatherapi import get_weather
 
+
 class IndexView(View):
 
     def get(self, request, **kwargs):

@@ -1,5 +1,6 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'weather/generic-weather-detail.html' %}
+{% load tz %}
+{% block body %}
 
     {% for item in weather %}
         <p>Condition: {{ item.main | title }}</p>
@@ -12,6 +13,8 @@
     <p>Wind gust: {{ wind.gust }} km/h</p>
     {% endif %}
     <p>City: {{ name }}</p>
+    {% localtime on %}
     <p>Sunrise: {{ sys.sunrise }}</p>
-    <p>Sunset: {{ sys.sunset }}</p>
+    {% endlocaltime %}
+    <p>Sunset: {{ sys.sunset}}</p>
 {% endblock %}

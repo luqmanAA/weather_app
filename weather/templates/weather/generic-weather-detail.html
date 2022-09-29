@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        {% block navbar %}
+            <ul class="nav">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'weather:weather_detail' name %}">Today</a></li>
+                <li><a href="{% url 'weather:daily_detail' name 'yesterday' %}">Yesterday</a></li>
+            </ul>
+        {% endblock %}
+        <div class="row">
+            <div class="col">
+                {% block body %}
+
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
